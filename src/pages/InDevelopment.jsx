@@ -1,0 +1,61 @@
+import React from 'react'
+import { Link, useParams } from 'react-router-dom'
+
+function InDevelopment() {
+  const { appName } = useParams()
+  const displayName = appName ? decodeURIComponent(appName) : 'this app'
+
+  return (
+    <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-12">
+          <div className="mb-8">
+            <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center">
+              <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            {displayName} is Coming Soon!
+          </h1>
+          <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+            We're working hard to bring <span className="font-semibold text-gray-900">{displayName}</span> to life!
+          </p>
+          <div className="bg-white rounded-lg shadow-lg p-8 md:p-12 mb-8">
+            <div className="flex items-center justify-center mb-6">
+              <div className="relative">
+                <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+              </div>
+            </div>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              This app is currently in development
+            </h2>
+            
+            <p className="text-gray-600 text-lg mb-8">
+              <span className="font-semibold text-blue-600">Watch this space!</span> We'll be launching soon.
+            </p>
+            <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg">
+              <p className="text-gray-700">
+                <strong>Stay updated:</strong> Follow us to be notified when {displayName} launches!
+              </p>
+            </div>
+          </div>
+          <Link
+            to="/"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default InDevelopment
+
