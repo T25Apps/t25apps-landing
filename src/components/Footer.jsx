@@ -16,7 +16,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">T25Apps</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">t25apps</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
               Building innovative apps that make a difference in people's lives. Simple, powerful, and built for you.
             </p>
@@ -87,7 +87,7 @@ function Footer() {
 
         <div className="border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 md:mb-0">
-            &copy; {currentYear} T25Apps. All rights reserved.
+            &copy; {currentYear} t25apps. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <span className="text-gray-400 dark:text-gray-600 text-sm">Designed with ❤️</span>
