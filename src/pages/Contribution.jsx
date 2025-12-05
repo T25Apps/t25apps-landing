@@ -48,22 +48,22 @@ function Contribution() {
   }
 
   return (
-    <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
+    <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950 min-h-screen transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
             Support T25Apps
           </h1>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="w-24 h-1 bg-gray-900 dark:bg-white mx-auto mb-4 rounded-full"></div>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Your contributions help us continue developing innovative apps and bringing 
             new ideas to life. Every donation makes a difference!
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-xl p-8 md:p-12">
+        <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 md:p-12 shadow-sm">
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
               Select Contribution Amount
             </h2>
             <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-6">
@@ -71,10 +71,10 @@ function Contribution() {
                 <button
                   key={amount}
                   onClick={() => handleAmountSelect(amount)}
-                  className={`py-3 px-4 rounded-lg border-2 font-semibold transition-all ${
+                  className={`py-3 px-4 rounded-xl border font-semibold transition-all duration-200 ${
                     selectedAmount === amount.toString()
-                      ? 'border-blue-600 bg-blue-600 text-white'
-                      : 'border-gray-300 text-gray-700 hover:border-blue-400 hover:bg-blue-50'
+                      ? 'border-gray-900 bg-gray-900 text-white dark:border-white dark:bg-white dark:text-gray-900'
+                      : 'border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500 hover:bg-white dark:hover:bg-gray-800'
                   }`}
                 >
                   ${amount}
@@ -82,7 +82,7 @@ function Contribution() {
               ))}
             </div>
             <div>
-              <label htmlFor="customAmount" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="customAmount" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Or enter custom amount
               </label>
               <input
@@ -93,14 +93,14 @@ function Contribution() {
                 min="1"
                 step="0.01"
                 placeholder="Enter amount"
-                className="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full md:w-64 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-colors"
               />
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Your Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -110,13 +110,13 @@ function Contribution() {
                 value={formData.name}
                 onChange={handleFormChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-colors"
                 placeholder="John Doe"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email Address <span className="text-red-500">*</span>
               </label>
               <input
@@ -126,13 +126,13 @@ function Contribution() {
                 value={formData.email}
                 onChange={handleFormChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-colors"
                 placeholder="your.email@example.com"
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Message (Optional)
               </label>
               <textarea
@@ -141,15 +141,15 @@ function Contribution() {
                 value={formData.message}
                 onChange={handleFormChange}
                 rows="4"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-colors"
                 placeholder="Leave us a message..."
               ></textarea>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-semibold text-gray-900">Contribution Amount:</span>
-                <span className="text-2xl font-bold text-blue-600">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-900 dark:text-white">Contribution Amount:</span>
+                <span className="text-2xl font-bold text-gray-900 dark:text-white">
                   ${selectedAmount || customAmount || '0.00'}
                 </span>
               </div>
@@ -157,13 +157,13 @@ function Contribution() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg shadow-lg"
+              className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-4 rounded-xl hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-semibold text-lg shadow-sm"
             >
               Continue to Payment
             </button>
 
             {submitted && (
-              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 px-4 py-3 rounded-xl">
                 <p className="font-semibold">Thank you for your contribution!</p>
                 <p className="text-sm mt-1">
                   In a production environment, you would be redirected to a secure payment processor.
@@ -173,29 +173,29 @@ function Contribution() {
             )}
           </form>
 
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Other Ways to Contribute</h3>
-            <ul className="space-y-2 text-gray-600">
+          <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Other Ways to Contribute</h3>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-400">
               <li className="flex items-start">
-                <svg className="w-5 h-5 text-blue-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-gray-900 dark:text-white mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 Share our apps with friends and family
               </li>
               <li className="flex items-start">
-                <svg className="w-5 h-5 text-blue-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-gray-900 dark:text-white mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 Provide feedback and suggestions
               </li>
               <li className="flex items-start">
-                <svg className="w-5 h-5 text-blue-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-gray-900 dark:text-white mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 Follow us on social media
               </li>
               <li className="flex items-start">
-                <svg className="w-5 h-5 text-blue-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-gray-900 dark:text-white mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 Rate and review our apps

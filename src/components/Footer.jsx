@@ -12,36 +12,36 @@ function Footer() {
   ]
 
   return (
-    <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 pt-16 pb-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 className="text-2xl font-bold mb-4">T25Apps</h3>
-            <p className="text-gray-400">
-              Building innovative apps that make a difference in people's lives.
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="col-span-1 md:col-span-1">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">T25Apps</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+              Building innovative apps that make a difference in people's lives. Simple, powerful, and built for you.
             </p>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Quick Links</h4>
+            <ul className="space-y-3">
               <li>
-                <a href="#about" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#about" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#products" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#products" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
                   Products
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#contact" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
                   Contact
                 </a>
               </li>
               <li>
-                <Link to="/contribution" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/contribution" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
                   Contribute
                 </Link>
               </li>
@@ -49,15 +49,15 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2">
+            <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Legal</h4>
+            <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
                   Terms of Service
                 </a>
               </li>
@@ -65,7 +65,7 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
+            <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Follow Us</h4>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <a
@@ -73,7 +73,7 @@ function Footer() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                   aria-label={social.name}
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -85,8 +85,13 @@ function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} T25Apps. All rights reserved.</p>
+        <div className="border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 md:mb-0">
+            &copy; {currentYear} T25Apps. All rights reserved.
+          </p>
+          <div className="flex space-x-6">
+            <span className="text-gray-400 dark:text-gray-600 text-sm">Designed with ❤️</span>
+          </div>
         </div>
       </div>
     </footer>

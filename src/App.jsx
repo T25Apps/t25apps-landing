@@ -13,7 +13,7 @@ import InDevelopment from './pages/InDevelopment'
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-300">
         <Navbar />
         <Routes>
           <Route path="/" element={
