@@ -48,8 +48,8 @@ function Contact() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-base font-semibold text-gray-900 dark:text-white">Email</h4>
-                  <a href="mailto:reacht25apps@gmail.com" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-                    reacht25apps@gmail.com
+                  <a href="mailto:contact@t25apps.com" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                    contact@t25apps.com
                   </a>
                 </div>
               </div>

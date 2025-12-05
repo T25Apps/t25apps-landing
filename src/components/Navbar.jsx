@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import logo from '../assets/logo1.png'
+import logoLight from '../assets/logo_light.png'
+import logoDark from '../assets/logo_dark.png'
 import { useTheme } from '../context/ThemeContext'
 
 function Navbar() {
@@ -46,8 +47,7 @@ function Navbar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center group">
-              <img src={logo} alt="T25Apps" className="h-10 w-auto transition-transform duration-300 group-hover:scale-105" />
-              
+              <img src={theme === 'dark' ? logoDark : logoLight} alt="T25Apps" className="h-10 w-auto transition-transform duration-300 group-hover:scale-105" />
             </Link>
           </div>
 
