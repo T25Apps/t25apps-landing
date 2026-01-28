@@ -102,6 +102,26 @@ Currently, forms are static. To add real form submission:
    - Square
    - Custom payment gateway
 
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and fill in your values:
+
+```bash
+cp .env.example .env.local
+```
+
+Required variables:
+- `VITE_GA_MEASUREMENT_ID` - Google Analytics Measurement ID
+- `VITE_ENABLE_ANALYTICS` - Set to `true` to enable analytics
+
+## Project Status
+
+✅ Core features complete
+🚧 Individual app pages - In progress
+🚧 SEO optimization - In progress
+📋 Blog section - Planned
+📋 Newsletter integration - Planned
+
 ## Deployment
 
 This is a static website that can be deployed to:
