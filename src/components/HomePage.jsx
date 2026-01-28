@@ -525,7 +525,7 @@ function HomePage() {
                   </div>
                 </div>
               </div>
-            </div>
+              </div>
             </div>
           </div>
         </>
@@ -593,6 +593,7 @@ function HomePage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
+                      maxLength={100}
                       className="w-full px-3 py-2 text-xs bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg text-stone-900 dark:text-white placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:focus:ring-white transition-all"
                       placeholder="Your name"
                     />
@@ -606,6 +607,7 @@ function HomePage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      maxLength={254}
                       className="w-full px-3 py-2 text-xs bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg text-stone-900 dark:text-white placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:focus:ring-white transition-all"
                       placeholder="your@email.com"
                     />
@@ -618,6 +620,7 @@ function HomePage() {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      maxLength={5000}
                       rows={3}
                       className="w-full px-3 py-2 text-xs bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg text-stone-900 dark:text-white placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:focus:ring-white transition-all resize-none"
                       placeholder="Tell us more..."
@@ -664,8 +667,8 @@ function HomePage() {
                   </div>
                 </div>
               </div>
+              </div>
             </div>
-          </div>
           </div>
         </>
       )}

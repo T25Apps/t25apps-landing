@@ -3,12 +3,29 @@
  * Works with Vercel serverless functions
  */
 
+// Simple in-memory rate limiting (resets on cold starts)
+const rateLimitMap = new Map()
+const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 3 // Max 3 emails per minute per IP
+
+// Allowed origins for CORS
+const ALLOWED_ORIGINS = [
+  'https://www.t25apps.com',
+  'https://t25apps.com',
+  'https://t25apps.vercel.app'
+]
+
 export default async function handler(req, res) {
-  // CORS headers - must be set first
+  // Get origin and set appropriate CORS headers
+  const origin = req.headers.origin
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
+  } else if (process.env.NODE_ENV === 'development' || origin?.includes('localhost')) {
+    res.setHeader('Access-Control-Allow-Origin', origin || '*')
+  }
   res.setHeader('Access-Control-Allow-Credentials', 'true')
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version')
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 
   // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
@@ -20,13 +37,63 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
+  // Rate limiting by IP
+  const clientIP = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
+                   req.headers['x-real-ip'] || 
+                   'unknown'
+  const now = Date.now()
+  const rateKey = `rate_${clientIP}`
+  const rateData = rateLimitMap.get(rateKey) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW }
+  
+  if (now > rateData.resetTime) {
+    rateData.count = 0
+    rateData.resetTime = now + RATE_LIMIT_WINDOW
+  }
+  
+  if (rateData.count >= MAX_REQUESTS_PER_WINDOW) {
+    return res.status(429).json({ 
+      success: false, 
+      error: 'Too many requests. Please wait a minute before trying again.' 
+    })
+  }
+  
+  rateData.count++
+  rateLimitMap.set(rateKey, rateData)
+
   try {
     const { name, email, message } = req.body || {}
 
-    // Validate input
+    // Validate required fields
     if (!name || !email || !message) {
       return res.status(400).json({ success: false, error: 'Missing required fields: name, email, and message are required' })
     }
+
+    // Validate input lengths
+    if (name.length > 100) {
+      return res.status(400).json({ success: false, error: 'Name is too long (max 100 characters)' })
+    }
+    if (email.length > 254) {
+      return res.status(400).json({ success: false, error: 'Email is too long' })
+    }
+    if (message.length > 5000) {
+      return res.status(400).json({ success: false, error: 'Message is too long (max 5000 characters)' })
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ success: false, error: 'Please enter a valid email address' })
+    }
+
+    // Check for potential email header injection
+    if (/[\r\n]/.test(name) || /[\r\n]/.test(email)) {
+      return res.status(400).json({ success: false, error: 'Invalid characters in input' })
+    }
+
+    // Sanitize inputs (trim whitespace)
+    const sanitizedName = name.trim().slice(0, 100)
+    const sanitizedEmail = email.trim().toLowerCase().slice(0, 254)
+    const sanitizedMessage = message.trim().slice(0, 5000)
 
     // Get credentials from environment
     const apiToken = process.env.ZEPTO_API_TOKEN
@@ -74,15 +141,15 @@ export default async function handler(req, res) {
     <div class="content">
       <div class="field">
         <div class="label">From</div>
-        <div class="value">${escapeHtml(name)}</div>
+        <div class="value">${escapeHtml(sanitizedName)}</div>
       </div>
       <div class="field">
         <div class="label">Email</div>
-        <div class="value"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></div>
+        <div class="value"><a href="mailto:${escapeHtml(sanitizedEmail)}">${escapeHtml(sanitizedEmail)}</a></div>
       </div>
       <div class="field">
         <div class="label">Message</div>
-        <div class="message-box">${escapeHtml(message).replace(/\n/g, '<br>')}</div>
+        <div class="message-box">${escapeHtml(sanitizedMessage).replace(/\n/g, '<br>')}</div>
       </div>
     </div>
     <div class="footer">
@@ -108,8 +175,8 @@ export default async function handler(req, res) {
       ],
       reply_to: [
         {
-          address: email,
-          name: name
+          address: sanitizedEmail,
+          name: sanitizedName
         }
       ],
       subject: subject,

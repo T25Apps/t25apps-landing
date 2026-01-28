@@ -10,7 +10,6 @@ export const initAnalytics = () => {
   if (measurementId && import.meta.env.VITE_ENABLE_ANALYTICS !== 'false') {
     ReactGA.initialize(measurementId);
     analyticsInitialized = true;
-    console.log('Analytics initialized');
   }
 };
 
