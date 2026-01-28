@@ -4,51 +4,53 @@
  */
 
 export default async function handler(req, res) {
+  // CORS headers - must be set first
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version')
+
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end()
+  }
+
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  try {
+    const { name, email, message } = req.body || {}
 
-  // Handle preflight
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end()
-  }
+    // Validate input
+    if (!name || !email || !message) {
+      return res.status(400).json({ success: false, error: 'Missing required fields: name, email, and message are required' })
+    }
 
-  const { name, email, message } = req.body
+    // Get credentials from environment
+    const apiToken = process.env.ZEPTO_API_TOKEN
+    const fromEmail = process.env.ZEPTO_FROM_EMAIL || 'noreply@t25apps.com'
+    const fromName = process.env.ZEPTO_FROM_NAME || 'T25Apps Contact Form'
+    const toEmail = 'contact@t25apps.com'
 
-  // Validate input
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Missing required fields' })
-  }
+    if (!apiToken) {
+      console.error('ZEPTO_API_TOKEN not configured')
+      return res.status(500).json({ success: false, error: 'Email service not configured. Please contact support.' })
+    }
 
-  // Get credentials from environment
-  const apiToken = process.env.ZEPTO_API_TOKEN
-  const fromEmail = process.env.ZEPTO_FROM_EMAIL || 'noreply@t25apps.com'
-  const fromName = process.env.ZEPTO_FROM_NAME || 'T25Apps Contact Form'
-  const toEmail = 'contact@t25apps.com'
+    // Generate subject line: General Enquiry_DD_MM_YYYY_HHMMSS
+    const now = new Date()
+    const day = String(now.getDate()).padStart(2, '0')
+    const month = String(now.getMonth() + 1).padStart(2, '0')
+    const year = now.getFullYear()
+    const hours = String(now.getHours()).padStart(2, '0')
+    const minutes = String(now.getMinutes()).padStart(2, '0')
+    const seconds = String(now.getSeconds()).padStart(2, '0')
+    const subject = `General Enquiry_${day}_${month}_${year}_${hours}${minutes}${seconds}`
 
-  if (!apiToken) {
-    console.error('ZEPTO_API_TOKEN not configured')
-    return res.status(500).json({ error: 'Email service not configured' })
-  }
-
-  // Generate subject line: General Enquiry_DD_MM_YYYY_HHMMSS
-  const now = new Date()
-  const day = String(now.getDate()).padStart(2, '0')
-  const month = String(now.getMonth() + 1).padStart(2, '0')
-  const year = now.getFullYear()
-  const hours = String(now.getHours()).padStart(2, '0')
-  const minutes = String(now.getMinutes()).padStart(2, '0')
-  const seconds = String(now.getSeconds()).padStart(2, '0')
-  const subject = `General Enquiry_${day}_${month}_${year}_${hours}${minutes}${seconds}`
-
-  // HTML email template
-  const htmlBody = `
+    // HTML email template
+    const htmlBody = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,30 +93,29 @@ export default async function handler(req, res) {
 </html>
 `
 
-  const payload = {
-    from: {
-      address: fromEmail,
-      name: fromName
-    },
-    to: [
-      {
-        email_address: {
-          address: toEmail,
-          name: 'T25Apps Team'
+    const payload = {
+      from: {
+        address: fromEmail,
+        name: fromName
+      },
+      to: [
+        {
+          email_address: {
+            address: toEmail,
+            name: 'T25Apps Team'
+          }
         }
-      }
-    ],
-    reply_to: [
-      {
-        address: email,
-        name: name
-      }
-    ],
-    subject: subject,
-    htmlbody: htmlBody
-  }
+      ],
+      reply_to: [
+        {
+          address: email,
+          name: name
+        }
+      ],
+      subject: subject,
+      htmlbody: htmlBody
+    }
 
-  try {
     const response = await fetch('https://api.zeptomail.com/v1.1/email', {
       method: 'POST',
       headers: {
@@ -150,6 +151,7 @@ export default async function handler(req, res) {
 
 // Helper to escape HTML
 function escapeHtml(text) {
+  if (!text) return ''
   const map = {
     '&': '&amp;',
     '<': '&lt;',
@@ -157,5 +159,5 @@ function escapeHtml(text) {
     '"': '&quot;',
     "'": '&#039;'
   }
-  return text.replace(/[&<>"']/g, m => map[m])
+  return String(text).replace(/[&<>"']/g, m => map[m])
 }
