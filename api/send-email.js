@@ -116,7 +116,7 @@ export default async function handler(req, res) {
       htmlbody: htmlBody
     }
 
-    const response = await fetch('https://api.zeptomail.com/v1.1/email', {
+    const response = await fetch('https://api.zeptomail.in/v1.1/email', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
