@@ -19,6 +19,7 @@ export const SOCIAL_MEDIA = {
   facebook: 'https://facebook.com/t25apps',
   threads: 'https://threads.net/t25apps',
   youtube: 'https://youtube.com/@t25apps',
+  twitter: 'https://twitter.com/t25apps',
 }
 
 // URLs
