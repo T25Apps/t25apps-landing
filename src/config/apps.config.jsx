@@ -155,8 +155,8 @@ export const apps = [
     status: 'in-development',
     platforms: ['Web', 'iOS', 'Android'],
     
-    website: 'https://www.recipediary.app',
-    href: 'https://www.recipediary.app',
+    website: 'https://recipediary.app',
+    href: 'https://recipediary.app',
     github: null,
     appStore: null,
     playStore: null,

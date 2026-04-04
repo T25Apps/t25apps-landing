@@ -37,7 +37,7 @@ function AppContent() {
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/apps/recipe-diary" element={<ExternalRedirect url="https://www.recipediary.app" />} />
+        <Route path="/apps/recipe-diary" element={<ExternalRedirect url="https://recipediary.app" />} />
         <Route path="/apps/:slug" element={<AppDetail />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
