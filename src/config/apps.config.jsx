@@ -44,11 +44,11 @@ export const apps = [
     shortDescription: 'A simple to use calendar app that helps you stay organized and manage your tasks efficiently.',
     fullDescription: 'Calendr is a beautifully designed calendar and task management app that helps you stay organized without the complexity. Built with simplicity in mind, it combines a clean interface with powerful features to manage your daily schedule, tasks, and events seamlessly.',
     category: 'Productivity',
-    status: 'available', // available, in-development, coming-soon
+    status: 'in-development', // available, in-development, coming-soon
     platforms: ['Web', 'iOS', 'Android'],
     
     // Links
-    website: 'https://calendr.t25apps.com',
+    website: null,
     github: null, // Add if open source
     appStore: null, // Add when available
     playStore: null, // Add when available
@@ -155,7 +155,8 @@ export const apps = [
     status: 'in-development',
     platforms: ['Web', 'iOS', 'Android'],
     
-    website: 'https://recipediary.t25apps.com',
+    website: 'https://www.recipediary.app',
+    href: 'https://www.recipediary.app',
     github: null,
     appStore: null,
     playStore: null,

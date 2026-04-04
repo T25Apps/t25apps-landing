@@ -22,11 +22,15 @@ function Products() {
             const statusLabel = APP_STATUS_LABELS[app.status] || app.status
             const statusColors = APP_STATUS_COLORS[app.status] || APP_STATUS_COLORS['in-development']
             const IconComponent = AppIcons[app.icon]
+            const href = app.href || `/apps/${app.slug}`
+            const isExternal = Boolean(app.href)
             
             return (
               <Link
                 key={app.id}
-                to={`/apps/${app.slug}`}
+                to={href}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
                 className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full"
               >
                 <div className="absolute top-6 right-6">

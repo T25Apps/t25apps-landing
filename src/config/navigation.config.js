@@ -34,7 +34,7 @@ export const footerNavigation = {
     links: [
       { name: 'Calendr', href: '/apps/calendr', external: false },
       { name: 'Orbyte', href: '/apps/orbyte', external: false },
-      { name: 'RecipeDiary', href: '/apps/recipe-diary', external: false },
+      { name: 'RecipeDiary', href: 'https://www.recipediary.app', external: true },
       { name: 'MyInvestments', href: '/apps/my-investments', external: false },
     ],
   },
