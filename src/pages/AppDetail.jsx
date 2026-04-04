@@ -343,29 +343,58 @@ function AppDetail() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {otherApps.map((otherApp) => {
                   const OtherIcon = AppIcons[otherApp.icon]
+                  const otherAppHref = otherApp.href || `/apps/${otherApp.slug}`
+                  const isExternalOtherApp = Boolean(otherApp.href)
                   return (
-                    <Link
-                      key={otherApp.id}
-                      to={`/apps/${otherApp.slug}`}
-                      className="app-card group flex items-start gap-4 p-5 bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800"
-                    >
-                      <div 
-                        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
-                        style={{ backgroundColor: otherApp.primaryColor }}
+                    isExternalOtherApp ? (
+                      <a
+                        key={otherApp.id}
+                        href={otherAppHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="app-card group flex items-start gap-4 p-5 bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800"
                       >
-                        <div className="text-white">
-                          {OtherIcon && <OtherIcon />}
+                        <div 
+                          className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
+                          style={{ backgroundColor: otherApp.primaryColor }}
+                        >
+                          <div className="text-white">
+                            {OtherIcon && <OtherIcon />}
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-stone-900 dark:text-white mb-1">
-                          {otherApp.name}
-                        </h3>
-                        <p className="text-sm text-stone-500 dark:text-stone-400 line-clamp-1">
-                          {otherApp.tagline}
-                        </p>
-                      </div>
-                    </Link>
+                        <div>
+                          <h3 className="font-semibold text-stone-900 dark:text-white mb-1">
+                            {otherApp.name}
+                          </h3>
+                          <p className="text-sm text-stone-500 dark:text-stone-400 line-clamp-1">
+                            {otherApp.tagline}
+                          </p>
+                        </div>
+                      </a>
+                    ) : (
+                      <Link
+                        key={otherApp.id}
+                        to={otherAppHref}
+                        className="app-card group flex items-start gap-4 p-5 bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800"
+                      >
+                        <div 
+                          className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
+                          style={{ backgroundColor: otherApp.primaryColor }}
+                        >
+                          <div className="text-white">
+                            {OtherIcon && <OtherIcon />}
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-stone-900 dark:text-white mb-1">
+                            {otherApp.name}
+                          </h3>
+                          <p className="text-sm text-stone-500 dark:text-stone-400 line-clamp-1">
+                            {otherApp.tagline}
+                          </p>
+                        </div>
+                      </Link>
+                    )
                   )
                 })}
               </div>

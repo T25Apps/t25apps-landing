@@ -24,14 +24,51 @@ function Products() {
             const IconComponent = AppIcons[app.icon]
             const href = app.href || `/apps/${app.slug}`
             const isExternal = Boolean(app.href)
+            const cardClassName = 'group relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full'
             
+            if (isExternal) {
+              return (
+                <a
+                  key={app.id}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cardClassName}
+                >
+                  <div className="absolute top-6 right-6">
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColors.bg} ${statusColors.text}`}>
+                      {statusLabel}
+                    </span>
+                  </div>
+
+                  <div className="mb-6 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl w-fit text-gray-900 dark:text-white group-hover:scale-110 transition-transform duration-300">
+                    {IconComponent && <IconComponent />}
+                  </div>
+
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {app.name}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">
+                      {app.shortDescription}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 flex items-center text-sm font-medium text-gray-900 dark:text-white group-hover:translate-x-1 transition-transform duration-200">
+                    Learn more
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </a>
+              )
+            }
+
             return (
               <Link
                 key={app.id}
                 to={href}
-                target={isExternal ? '_blank' : undefined}
-                rel={isExternal ? 'noopener noreferrer' : undefined}
-                className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full"
+                className={cardClassName}
               >
                 <div className="absolute top-6 right-6">
                   <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColors.bg} ${statusColors.text}`}>

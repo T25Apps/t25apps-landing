@@ -8,6 +8,14 @@ const AppDetail = lazy(() => import('./pages/AppDetail'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 
+function ExternalRedirect({ url }) {
+  useEffect(() => {
+    window.location.replace(url)
+  }, [url])
+
+  return null
+}
+
 // Loading fallback component
 const LoadingFallback = () => (
   <div className="h-screen-safe flex items-center justify-center bg-stone-50 dark:bg-stone-950 dotted-bg">
@@ -29,6 +37,7 @@ function AppContent() {
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/apps/recipe-diary" element={<ExternalRedirect url="https://www.recipediary.app" />} />
         <Route path="/apps/:slug" element={<AppDetail />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
