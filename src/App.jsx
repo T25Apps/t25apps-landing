@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import { trackPageView } from './utils/analytics'
 
@@ -38,6 +38,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/apps/recipe-diary" element={<ExternalRedirect url="https://recipediary.app" />} />
+        <Route path="/apps/my-investments" element={<Navigate to="/apps/my-nest" replace />} />
         <Route path="/apps/:slug" element={<AppDetail />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
