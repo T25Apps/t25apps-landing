@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { apps, AppIcons } from '../config/apps.config.jsx'
@@ -51,28 +51,96 @@ function HomePage() {
     'coming-soon': 0.75
   }
 
-  // Calculate positions for radial layout
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        setDimensions({
-          width: containerRef.current.offsetWidth,
-          height: containerRef.current.offsetHeight
-        })
+  // Keep layout metrics in sync with the actual container and mobile visual viewport.
+  useLayoutEffect(() => {
+    let firstFrameId = null
+    let secondFrameId = null
+
+    const updateLayoutMetrics = () => {
+      const container = containerRef.current
+      const viewport = window.visualViewport
+
+      if (container) {
+        const rect = container.getBoundingClientRect()
+        const nextWidth = Math.round(rect.width || viewport?.width || window.innerWidth || 0)
+        const nextHeight = Math.round(rect.height || viewport?.height || window.innerHeight || 0)
+
+        setDimensions((previous) => (
+          previous.width === nextWidth && previous.height === nextHeight
+            ? previous
+            : { width: nextWidth, height: nextHeight }
+        ))
       }
-      // Update link positions for dotted lines
+
       if (aboutLinkRef.current && contactLinkRef.current) {
         const aboutRect = aboutLinkRef.current.getBoundingClientRect()
         const contactRect = contactLinkRef.current.getBoundingClientRect()
-        setLinkPositions({
-          about: { x: aboutRect.left + aboutRect.width / 2, y: aboutRect.top },
-          contact: { x: contactRect.left + contactRect.width / 2, y: contactRect.top }
+
+        setLinkPositions((previous) => {
+          const nextPositions = {
+            about: { x: aboutRect.left + aboutRect.width / 2, y: aboutRect.top },
+            contact: { x: contactRect.left + contactRect.width / 2, y: contactRect.top }
+          }
+
+          if (
+            previous.about?.x === nextPositions.about.x &&
+            previous.about?.y === nextPositions.about.y &&
+            previous.contact?.x === nextPositions.contact.x &&
+            previous.contact?.y === nextPositions.contact.y
+          ) {
+            return previous
+          }
+
+          return nextPositions
         })
       }
     }
-    updateDimensions()
-    window.addEventListener('resize', updateDimensions)
-    return () => window.removeEventListener('resize', updateDimensions)
+
+    const scheduleLayoutUpdate = () => {
+      if (firstFrameId) {
+        cancelAnimationFrame(firstFrameId)
+      }
+      if (secondFrameId) {
+        cancelAnimationFrame(secondFrameId)
+      }
+
+      firstFrameId = requestAnimationFrame(() => {
+        updateLayoutMetrics()
+        secondFrameId = requestAnimationFrame(updateLayoutMetrics)
+      })
+    }
+
+    scheduleLayoutUpdate()
+
+    const resizeObserver = typeof ResizeObserver !== 'undefined' && containerRef.current
+      ? new ResizeObserver(scheduleLayoutUpdate)
+      : null
+
+    if (resizeObserver && containerRef.current) {
+      resizeObserver.observe(containerRef.current)
+    }
+
+    window.addEventListener('resize', scheduleLayoutUpdate)
+    window.addEventListener('orientationchange', scheduleLayoutUpdate)
+    window.addEventListener('scroll', scheduleLayoutUpdate, { passive: true })
+    window.visualViewport?.addEventListener('resize', scheduleLayoutUpdate)
+    window.visualViewport?.addEventListener('scroll', scheduleLayoutUpdate)
+
+    return () => {
+      if (firstFrameId) {
+        cancelAnimationFrame(firstFrameId)
+      }
+      if (secondFrameId) {
+        cancelAnimationFrame(secondFrameId)
+      }
+
+      resizeObserver?.disconnect()
+      window.removeEventListener('resize', scheduleLayoutUpdate)
+      window.removeEventListener('orientationchange', scheduleLayoutUpdate)
+      window.removeEventListener('scroll', scheduleLayoutUpdate)
+      window.visualViewport?.removeEventListener('resize', scheduleLayoutUpdate)
+      window.visualViewport?.removeEventListener('scroll', scheduleLayoutUpdate)
+    }
   }, [])
 
   // Contact form handlers
@@ -105,12 +173,27 @@ function HomePage() {
   // Combine real apps with future placeholders
   const allTiles = [...apps, ...futureTiles]
 
+  // Responsive sizing
+  const isMobile = dimensions.width < 640
+  const isTablet = dimensions.width >= 640 && dimensions.width < 1024
+
+  // Get tile size based on status and screen size
+  const getTileWidth = (status) => {
+    const baseSize = isMobile ? 90 : isTablet ? 120 : 160
+    return baseSize * (tileSizeMultipliers[status] || 1)
+  }
+
+  const getTileHeight = (status) => {
+    const baseHeight = isMobile ? 82 : isTablet ? 106 : 138
+    return baseHeight * (tileSizeMultipliers[status] || 1)
+  }
+
+  const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum)
+
   // Calculate tile positions in a radial pattern with random distances
   const getAppPositions = () => {
     const positions = []
     const numApps = allTiles.length
-    const isMobile = dimensions.width < 640
-    const isTablet = dimensions.width >= 640 && dimensions.width < 1024
     
     // Base radius based on screen size
     let baseRadius
@@ -131,14 +214,22 @@ function HomePage() {
     // Predefined random-looking distance variations for each position
     // Index 2 is the right-side tile, give it more distance
     const distanceVariations = [0.95, 1.08, 1.25, 1.12, 1.0, 0.92, 1.18, 0.88]
+    const horizontalPadding = isMobile ? 20 : isTablet ? 28 : 36
+    const verticalPadding = isMobile ? 84 : isTablet ? 96 : 112
     
     for (let i = 0; i < numApps; i++) {
+      const tile = allTiles[i]
       const angle = startAngle + (2 * Math.PI * i) / numApps
       // Apply semi-random distance variation
       const radiusVariation = baseRadius * distanceVariations[i % distanceVariations.length]
+      const tileWidth = getTileWidth(tile.status)
+      const tileHeight = getTileHeight(tile.status)
+      const proposedX = centerX + radiusVariation * Math.cos(angle)
+      const proposedY = centerY + radiusVariation * Math.sin(angle)
+
       positions.push({
-        x: centerX + radiusVariation * Math.cos(angle),
-        y: centerY + radiusVariation * Math.sin(angle),
+        x: clamp(proposedX, horizontalPadding + tileWidth / 2, dimensions.width - horizontalPadding - tileWidth / 2),
+        y: clamp(proposedY, verticalPadding + tileHeight / 2, dimensions.height - verticalPadding - tileHeight / 2),
         angle: angle
       })
     }
@@ -148,16 +239,6 @@ function HomePage() {
   const appPositions = getAppPositions()
   const centerX = dimensions.width / 2
   const centerY = dimensions.height / 2
-
-  // Responsive sizing
-  const isMobile = dimensions.width < 640
-  const isTablet = dimensions.width >= 640 && dimensions.width < 1024
-
-  // Get tile size based on status and screen size
-  const getTileWidth = (status) => {
-    const baseSize = isMobile ? 90 : isTablet ? 120 : 160
-    return baseSize * (tileSizeMultipliers[status] || 1)
-  }
 
   return (
     <div className="h-screen-safe flex flex-col bg-stone-50 dark:bg-stone-950 dotted-bg overflow-hidden">
