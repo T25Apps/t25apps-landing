@@ -113,11 +113,11 @@ export const apps = [
   
   {
     id: 2,
-    name: 'Orbyte',
+    name: 'EduByte',
     slug: 'orbyte',
     tagline: 'Study Smarter, Not Harder',
     shortDescription: 'An innovative study guide for students to help them understand and learn faster.',
-    fullDescription: 'Orbyte is an AI-powered study companion designed for students who want to learn more effectively. Using proven learning techniques and modern technology, Orbyte helps you create study guides, practice with flashcards, take notes, and track your progress across all subjects.',
+    fullDescription: 'EduByte is an AI-powered study companion designed for students who want to learn more effectively. Using proven learning techniques and modern technology, EduByte helps you create study guides, practice with flashcards, take notes, and track your progress across all subjects.',
     category: 'Education',
     status: 'in-development',
     platforms: ['Web', 'iOS', 'Android'],
@@ -150,8 +150,8 @@ export const apps = [
     demoPoster: null,
     
     seo: {
-      title: 'Orbyte - AI-Powered Study Guide & Learning App | T25Apps',
-      description: 'Learn faster with Orbyte, an AI-powered study companion. Create study guides, practice with flashcards, and track your academic progress.',
+      title: 'EduByte - AI-Powered Study Guide & Learning App | T25Apps',
+      description: 'Learn faster with EduByte, an AI-powered study companion. Create study guides, practice with flashcards, and track your academic progress.',
       keywords: ['study app', 'learning app', 'flashcards', 'study guide', 'student app', 'education', 'orbyte'],
       ogImage: '/images/apps/orbyte-og.jpg',
     },
@@ -212,11 +212,11 @@ export const apps = [
   
   {
     id: 4,
-    name: 'MyNest',
+    name: 'Simplyfyn',
     slug: 'my-nest',
     tagline: 'Track Your Financial Journey',
     shortDescription: 'A simple to use investment tracker that helps you track your investments and plan your financial goals.',
-    fullDescription: 'MyNest is a comprehensive portfolio tracking app that helps you monitor all your investments in one place. Track stocks, bonds, crypto, real estate, and more while getting insights into your financial performance and progress towards your goals.',
+    fullDescription: 'Simplyfyn is a comprehensive portfolio tracking app that helps you monitor all your investments in one place. Track stocks, bonds, crypto, real estate, and more while getting insights into your financial performance and progress towards your goals.',
     category: 'Finance',
     status: 'in-development',
     platforms: ['Web', 'iOS', 'Android'],
@@ -249,8 +249,8 @@ export const apps = [
     demoPoster: null,
     
     seo: {
-      title: 'MyNest - Portfolio Tracker & Investment Manager | T25Apps',
-      description: 'Track all your investments in one place. Monitor stocks, crypto, and more with MyNest portfolio tracker.',
+      title: 'Simplyfyn - Portfolio Tracker & Investment Manager | T25Apps',
+      description: 'Track all your investments in one place. Monitor stocks, crypto, and more with Simplyfyn portfolio tracker.',
       keywords: ['investment tracker', 'portfolio management', 'stock tracker', 'crypto tracker', 'finance app', 'my nest'],
       ogImage: '/images/apps/mynest-og.jpg',
     },
@@ -308,7 +308,7 @@ export const apps = [
     id: 6,
     name: 'NGraph',
     slug: 'ngraph',
-    tagline: 'See Patterns In Your Numbers',
+    tagline: 'Catch the News Before It Catches You',
     shortDescription: 'A lightweight analytics app for turning raw metrics into clear charts, trends, and visual insights.',
     fullDescription: 'NGraph gives teams a fast way to explore datasets, visualize trends, and communicate insights without heavyweight BI tooling. Build dashboards, compare key metrics, and share clean visual narratives from a single workspace.',
     category: 'Analytics',

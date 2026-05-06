@@ -33,9 +33,9 @@ export const footerNavigation = {
     title: 'Products',
     links: [
       { name: 'MyCalendr', href: '/apps/calendr', external: false },
-      { name: 'Orbyte', href: '/apps/orbyte', external: false },
+      { name: 'EduByte', href: '/apps/orbyte', external: false },
       { name: 'RecipeDiary', href: 'https://recipediary.app', external: true },
-      { name: 'MyNest', href: '/apps/my-nest', external: false },
+      { name: 'Simplyfyn', href: '/apps/my-nest', external: false },
       { name: 'Templait', href: '/apps/templait', external: false },
       { name: 'NGraph', href: '/apps/ngraph', external: false },
     ],
