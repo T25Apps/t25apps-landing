@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { sendContactEmail } from '../utils/emailService'
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -7,6 +8,8 @@ function Contact() {
     message: ''
   })
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleChange = (e) => {
     setFormData({
@@ -15,13 +18,22 @@ function Contact() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
+    setIsSubmitting(true)
+    setError(null)
+
+    const result = await sendContactEmail(formData)
+
+    setIsSubmitting(false)
+
+    if (result.success) {
+      setSubmitted(true)
       setFormData({ name: '', email: '', message: '' })
-    }, 3000)
+      setTimeout(() => setSubmitted(false), 5000)
+    } else {
+      setError(result.message)
+    }
   }
 
   return (
@@ -123,14 +135,21 @@ function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-4 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                disabled={isSubmitting}
+                className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-4 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
 
               {submitted && (
                 <div className="p-4 rounded-lg bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-400 text-sm font-medium text-center animate-fade-in">
                   Thank you! Your message has been sent successfully.
+                </div>
+              )}
+
+              {error && (
+                <div className="p-4 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-400 text-sm font-medium text-center">
+                  {error}
                 </div>
               )}
             </div>

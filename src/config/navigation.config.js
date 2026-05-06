@@ -32,10 +32,12 @@ export const footerNavigation = {
   products: {
     title: 'Products',
     links: [
-      { name: 'Calendr', href: '/apps/calendr', external: false },
+      { name: 'MyCalendr', href: '/apps/calendr', external: false },
       { name: 'Orbyte', href: '/apps/orbyte', external: false },
       { name: 'RecipeDiary', href: 'https://recipediary.app', external: true },
       { name: 'MyNest', href: '/apps/my-nest', external: false },
+      { name: 'Templait', href: '/apps/templait', external: false },
+      { name: 'NGraph', href: '/apps/ngraph', external: false },
     ],
   },
   company: {

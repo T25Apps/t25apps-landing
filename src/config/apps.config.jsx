@@ -33,16 +33,32 @@ export const AppIcons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   ),
+  templait: () => (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9h8M8 13h8M8 17h5" />
+    </svg>
+  ),
+  ngraph: () => (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16l3-4 3 2 4-6" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 19h14" />
+      <circle cx="7" cy="16" r="1.25" fill="currentColor" stroke="none" />
+      <circle cx="10" cy="12" r="1.25" fill="currentColor" stroke="none" />
+      <circle cx="13" cy="14" r="1.25" fill="currentColor" stroke="none" />
+      <circle cx="17" cy="8" r="1.25" fill="currentColor" stroke="none" />
+    </svg>
+  ),
 }
 
 export const apps = [
   {
     id: 1,
-    name: 'Calendr',
+    name: 'MyCalendr',
     slug: 'calendr',
     tagline: 'Simplify Your Schedule',
     shortDescription: 'A simple to use calendar app that helps you stay organized and manage your tasks efficiently.',
-    fullDescription: 'Calendr is a beautifully designed calendar and task management app that helps you stay organized without the complexity. Built with simplicity in mind, it combines a clean interface with powerful features to manage your daily schedule, tasks, and events seamlessly.',
+    fullDescription: 'MyCalendr is a beautifully designed calendar and task management app that helps you stay organized without the complexity. Built with simplicity in mind, it combines a clean interface with powerful features to manage your daily schedule, tasks, and events seamlessly.',
     category: 'Productivity',
     status: 'in-development', // available, in-development, coming-soon
     platforms: ['Web', 'iOS', 'Android'],
@@ -84,8 +100,8 @@ export const apps = [
     
     // SEO
     seo: {
-      title: 'Calendr - Simple Calendar & Task Management App | T25Apps',
-      description: 'Stay organized with Calendr, a beautifully designed calendar and task management app. Manage your schedule, tasks, and events with ease.',
+      title: 'MyCalendr - Simple Calendar & Task Management App | T25Apps',
+      description: 'Stay organized with MyCalendr, a beautifully designed calendar and task management app. Manage your schedule, tasks, and events with ease.',
       keywords: ['calendar app', 'task management', 'schedule planner', 'productivity app', 'event organizer', 'calendr'],
       ogImage: '/images/apps/calendr-og.jpg',
     },
@@ -241,6 +257,96 @@ export const apps = [
     
     launchDate: null,
     lastUpdated: '2026-01-18',
+  },
+
+  {
+    id: 5,
+    name: 'Templait',
+    slug: 'templait',
+    tagline: 'Create Reusable Content Faster',
+    shortDescription: 'A template management workspace for organizing, drafting, and reusing high-quality content blocks.',
+    fullDescription: 'Templait helps teams standardize repeatable writing and workflow assets in one place. Build reusable templates, organize brand-approved snippets, and speed up content production without losing consistency.',
+    category: 'Productivity',
+    status: 'in-development',
+    platforms: ['Web'],
+
+    website: null,
+    github: null,
+    appStore: null,
+    playStore: null,
+
+    primaryColor: '#F59E0B',
+    accentColor: '#FBBF24',
+    icon: 'templait',
+
+    features: [
+      'Central library for reusable templates',
+      'Versioned content blocks and snippets',
+      'Team collaboration and approvals',
+      'Fast search across saved templates',
+      'Categories and tags for organization',
+      'Export-ready content formatting'
+    ],
+
+    technologies: ['React', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
+    screenshots: [],
+    demoVideo: null,
+    demoPoster: null,
+
+    seo: {
+      title: 'Templait - Reusable Content Template Workspace | T25Apps',
+      description: 'Create, organize, and reuse polished content faster with Templait, a collaborative template management workspace.',
+      keywords: ['template manager', 'content templates', 'writing workflow', 'knowledge base', 'templait'],
+      ogImage: '/images/apps/templait-og.jpg',
+    },
+
+    launchDate: null,
+    lastUpdated: '2026-05-06',
+  },
+
+  {
+    id: 6,
+    name: 'NGraph',
+    slug: 'ngraph',
+    tagline: 'See Patterns In Your Numbers',
+    shortDescription: 'A lightweight analytics app for turning raw metrics into clear charts, trends, and visual insights.',
+    fullDescription: 'NGraph gives teams a fast way to explore datasets, visualize trends, and communicate insights without heavyweight BI tooling. Build dashboards, compare key metrics, and share clean visual narratives from a single workspace.',
+    category: 'Analytics',
+    status: 'in-development',
+    platforms: ['Web'],
+
+    website: null,
+    github: null,
+    appStore: null,
+    playStore: null,
+
+    primaryColor: '#06B6D4',
+    accentColor: '#22D3EE',
+    icon: 'ngraph',
+
+    features: [
+      'Interactive line and bar visualizations',
+      'Custom dashboards for key metrics',
+      'Dataset comparison views',
+      'Saved reports and sharing links',
+      'Trend summaries and annotations',
+      'Responsive charts for web and mobile'
+    ],
+
+    technologies: ['React', 'Node.js', 'PostgreSQL', 'Chart.js'],
+    screenshots: [],
+    demoVideo: null,
+    demoPoster: null,
+
+    seo: {
+      title: 'NGraph - Visual Analytics Dashboard App | T25Apps',
+      description: 'Turn raw metrics into clean charts and dashboards with NGraph, a lightweight analytics workspace for visual insights.',
+      keywords: ['analytics dashboard', 'data visualization', 'charts app', 'metrics tracking', 'ngraph'],
+      ogImage: '/images/apps/ngraph-og.jpg',
+    },
+
+    launchDate: null,
+    lastUpdated: '2026-05-06',
   },
 ]
 
