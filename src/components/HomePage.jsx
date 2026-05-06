@@ -8,14 +8,6 @@ import logoLight from '../assets/logo_light.png'
 import logoDark from '../assets/logo_dark.png'
 import { sendContactEmail } from '../utils/emailService'
 
-// Placeholder tiles for future projects
-const futureTiles = [
-  { id: 'future-1', name: 'Coming Soon', tagline: 'New app in progress', status: 'coming-soon', primaryColor: '#6B7280' },
-  { id: 'future-2', name: 'Coming Soon', tagline: 'Stay tuned', status: 'coming-soon', primaryColor: '#9CA3AF' },
-  { id: 'future-3', name: 'Coming Soon', tagline: 'Something exciting', status: 'coming-soon', primaryColor: '#D1D5DB' },
-  { id: 'future-4', name: 'Coming Soon', tagline: 'More to come', status: 'coming-soon', primaryColor: '#E5E7EB' },
-]
-
 function HomePage() {
   const { theme, toggleTheme } = useTheme()
   const [hoveredApp, setHoveredApp] = useState(null)
@@ -171,7 +163,7 @@ function HomePage() {
   }
 
   // Combine real apps with future placeholders
-  const allTiles = [...apps, ...futureTiles]
+  const allTiles = apps
 
   // Responsive sizing
   const isMobile = dimensions.width < 640
