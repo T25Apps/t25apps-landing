@@ -164,10 +164,12 @@ export const getAppSchema = (app) => {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: app.name,
-    description: app.fullDescription || app.shortDescription,
+    description: app.seo?.description || app.fullDescription || app.shortDescription,
     url: app.website,
     applicationCategory: app.category,
     operatingSystem: app.platforms.join(', '),
+    keywords: Array.isArray(app.seo?.keywords) ? app.seo.keywords.join(', ') : undefined,
+    featureList: app.features,
     offers: {
       '@type': 'Offer',
       price: '0',

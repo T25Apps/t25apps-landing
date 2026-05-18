@@ -165,8 +165,8 @@ export const apps = [
     name: 'RecipeDiary',
     slug: 'recipe-diary',
     tagline: 'Preserve Your Culinary Memories',
-    shortDescription: 'A beautiful recipe app that helps you preserve and savor your favorite recipes from people you know.',
-    fullDescription: 'RecipeDiary is more than just a recipe app - it\'s a digital cookbook that preserves the stories and memories behind your favorite dishes. Save recipes from family, friends, and loved ones, complete with photos, notes, and the stories that make each dish special.',
+    shortDescription: 'RecipeDiary turns voice notes and recordings into beautiful recipe cards you can edit, organize, and share with family and friends.',
+    fullDescription: 'RecipeDiary is an AI recipe app that helps you generate recipe cards from voice notes, recordings, and family cooking memories. Capture grandma recipes, mother\'s recipes, and your own kitchen ideas, then organize them into beautiful, compact recipe cards you can edit, save, explore, and share as a link or image.',
     category: 'Food & Lifestyle',
     status: 'in-development',
     platforms: ['Web', 'iOS', 'Android'],
@@ -182,11 +182,14 @@ export const apps = [
     icon: 'recipediary',
     
     features: [
-      'Beautiful recipe cards with photos',
-      'Story and memory preservation',
+      'Generate recipe cards from voice notes and recordings',
+      'Beautiful and compact recipe cards with photos',
+      'Save grandma recipes and family cooking memories',
+      'Edit recipe cards anytime',
+      'Share recipe cards as a link or image',
+      'Explore community recipes',
       'Ingredient scaling calculator',
       'Shopping list generator',
-      'Meal planning calendar',
       'Recipe sharing with family',
       'Dietary filters and tags',
       'Cook mode with step-by-step guidance'
@@ -200,9 +203,9 @@ export const apps = [
     demoPoster: null,
     
     seo: {
-      title: 'RecipeDiary - Digital Recipe Book & Family Cookbook | T25Apps',
-      description: 'Preserve your family recipes and culinary memories with RecipeDiary. A beautiful digital cookbook for storing recipes from loved ones.',
-      keywords: ['recipe app', 'digital cookbook', 'family recipes', 'meal planner', 'cooking app', 'recipe diary'],
+      title: 'RecipeDiary - Voice to Recipe Cards with AI | T25Apps',
+      description: 'RecipeDiary helps you generate recipe cards from voice notes and recordings using AI. Record and save family recipes, organize beautiful recipe cards, explore community recipes, and share each recipe as a link or image.',
+      keywords: ['voice to recipe', 'generate recipe from voice notes', 'generate recipe from recording', 'voice notes to recipe card', 'recipe card generator', 'organize recipe cards', 'explore community recipes', 'record and save recipe', 'beautiful recipe card', 'compact recipe card', 'share recipe card as link', 'share recipe card as image', 'edit recipe card', 'family recipes', 'grandma recipes', 'bring life to grandma recipes', 'mothers recipes', 'cooking app', 'chef app', 'homecook app'],
       ogImage: '/images/apps/recipediary-og.jpg',
     },
     
