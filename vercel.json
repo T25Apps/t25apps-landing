@@ -26,6 +26,28 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/recipediary",
+      "destination": "https://recipediary.app",
+      "permanent": true
+    },
+    {
+      "source": "/recipe-diary",
+      "destination": "https://recipediary.app",
+      "permanent": true
+    },
+    {
+      "source": "/apps/recipediary",
+      "destination": "https://recipediary.app",
+      "permanent": true
+    },
+    {
+      "source": "/apps/recipe-diary",
+      "destination": "https://recipediary.app",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/:path*",
