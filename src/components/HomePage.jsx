@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { apps, AppIcons } from '../config/apps.config.jsx'
 import { APP_NAME, SOCIAL_MEDIA, CONTACT_EMAIL } from '../config/constants'
@@ -16,7 +15,12 @@ function HomePage() {
   const aboutLinkRef = useRef(null)
   const contactLinkRef = useRef(null)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-  const [linkPositions, setLinkPositions] = useState({ about: null, contact: null })
+  const [buildingAnimId, setBuildingAnimId] = useState(null)
+
+  const showBuildingAnimation = (appId) => {
+    setBuildingAnimId(appId)
+    setTimeout(() => setBuildingAnimId(null), 2500)
+  }
   
   // Contact form state
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -325,6 +329,8 @@ function HomePage() {
               const pos = appPositions[index]
               const isHovered = hoveredApp === tile.id
               const isFuture = tile.id?.toString().startsWith('future')
+              const isLive = tile.status === 'available'
+              const isAnimating = buildingAnimId === tile.id
               const tileWidth = getTileWidth(tile.status)
               const sizeMultiplier = tileSizeMultipliers[tile.status] || 1
               
@@ -334,16 +340,26 @@ function HomePage() {
               const statusFontSize = isMobile ? '6px' : isTablet ? '7px' : '9px'
               const iconSize = isMobile ? 28 * sizeMultiplier : isTablet ? 36 * sizeMultiplier : 48 * sizeMultiplier
               
-              const TileWrapper = isFuture ? 'div' : Link
-              const tileProps = isFuture 
-                ? { className: 'cursor-default' }
-                : { to: `/apps/${tile.slug}` }
+              // Determine wrapper: Live (RecipeDiary) → external link, Future → div, Others → button with animation
+              let TileWrapper = 'div'
+              let tileProps = {}
+              
+              if (isFuture) {
+                TileWrapper = 'div'
+                tileProps = {}
+              } else if (isLive) {
+                TileWrapper = 'a'
+                tileProps = { href: tile.href || '#', target: '_blank', rel: 'noopener noreferrer' }
+              } else {
+                TileWrapper = 'button'
+                tileProps = { type: 'button', onClick: () => showBuildingAnimation(tile.id) }
+              }
               
               return (
                 <TileWrapper
                   key={tile.id}
                   {...tileProps}
-                  className={`absolute z-10 transform -translate-x-1/2 -translate-y-1/2 ${isFuture ? 'cursor-default' : ''}`}
+                  className={`absolute z-10 transform -translate-x-1/2 -translate-y-1/2 border-0 bg-transparent p-0 ${isFuture ? 'cursor-default' : ''} ${!isLive && !isFuture ? 'cursor-pointer' : ''}`}
                   style={{ 
                     left: pos.x, 
                     top: pos.y,
@@ -358,11 +374,24 @@ function HomePage() {
                     className={`
                       bg-white dark:bg-stone-900 rounded-xl md:rounded-2xl p-2 md:p-3 lg:p-4
                       shadow-soft border border-stone-200 dark:border-stone-800 
-                      transition-all duration-300
+                      transition-all duration-300 relative
                       ${isHovered && !isFuture ? 'scale-110 shadow-soft-xl border-stone-300 dark:border-stone-600' : ''}
                       ${isFuture ? 'opacity-50' : ''}
+                      ${isAnimating ? 'animate-bounce' : ''}
                     `}
                   >
+                    {/* Building animation overlay for non-live tiles */}
+                    {isAnimating && (
+                      <div className="absolute inset-0 bg-white/90 dark:bg-stone-900/90 rounded-xl md:rounded-2xl flex flex-col items-center justify-center z-20 animate-fade-in">
+                        <svg className="w-5 h-5 md:w-6 md:h-6 text-amber-500 animate-spin mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className="font-semibold text-stone-700 dark:text-stone-300" style={{ fontSize: isMobile ? '7px' : isTablet ? '9px' : '10px' }}>
+                          Building...
+                        </span>
+                      </div>
+                    )}
+
                     {/* Status Badge */}
                     <div className="flex justify-end mb-1 md:mb-2">
                       <div className="flex items-center gap-0.5 md:gap-1">

@@ -4,7 +4,6 @@ import HomePage from './components/HomePage'
 import { trackPageView } from './utils/analytics'
 
 // Lazy load page components
-const AppDetail = lazy(() => import('./pages/AppDetail'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 
@@ -38,8 +37,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/apps/recipe-diary" element={<ExternalRedirect url="https://recipediary.app" />} />
-        <Route path="/apps/my-investments" element={<Navigate to="/apps/my-nest" replace />} />
-        <Route path="/apps/:slug" element={<AppDetail />} />
+        <Route path="/apps/*" element={<Navigate to="/" replace />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
