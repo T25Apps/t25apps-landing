@@ -168,7 +168,7 @@ export const apps = [
     shortDescription: 'RecipeDiary turns voice notes and recordings into beautiful recipe cards you can edit, organize, and share with family and friends.',
     fullDescription: 'RecipeDiary is an AI recipe app that helps you generate recipe cards from voice notes, recordings, and family cooking memories. Capture grandma recipes, mother\'s recipes, and your own kitchen ideas, then organize them into beautiful, compact recipe cards you can edit, save, explore, and share as a link or image.',
     category: 'Food & Lifestyle',
-    status: 'in-development',
+    status: 'available',
     platforms: ['Web', 'iOS', 'Android'],
     
     website: 'https://recipediary.app',

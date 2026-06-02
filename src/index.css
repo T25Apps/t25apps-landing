@@ -166,4 +166,26 @@ body {
   width: 100%;
 }
 
+/* Spin slow animation */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
+.animate-spin-slow {
+  animation: spinSlow 3s linear infinite;
+}
+
+/* Building progress bar animation */
+@keyframes buildProgress {
+  0% { width: 10%; }
+  20% { width: 35%; }
+  40% { width: 55%; }
+  60% { width: 70%; }
+  80% { width: 85%; }
+  100% { width: 95%; }
+}
+
+.animate-build-progress {
+  animation: buildProgress 2.5s ease-out forwards;
+}
