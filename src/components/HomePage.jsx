@@ -15,6 +15,7 @@ function HomePage() {
   const aboutLinkRef = useRef(null)
   const contactLinkRef = useRef(null)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const [linkPositions, setLinkPositions] = useState({ about: null, contact: null })
   const [buildingAnimId, setBuildingAnimId] = useState(null)
 
   const showBuildingAnimation = (appId) => {
@@ -40,9 +41,9 @@ function HomePage() {
     'coming-soon': 'SOON'
   }
 
-  // Tile size multipliers based on status
+  // Tile size multipliers based on status (kept uniform so all tiles match)
   const tileSizeMultipliers = {
-    available: 1.15,
+    available: 1.0,
     'in-development': 1.0,
     'coming-soon': 0.75
   }
