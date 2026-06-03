@@ -360,7 +360,7 @@ function HomePage() {
                 <TileWrapper
                   key={tile.id}
                   {...tileProps}
-                  className={`absolute z-10 transform -translate-x-1/2 -translate-y-1/2 border-0 bg-transparent p-0 ${isFuture ? 'cursor-default' : ''} ${!isLive && !isFuture ? 'cursor-pointer' : ''}`}
+                  className={`absolute z-10 transform -translate-x-1/2 -translate-y-1/2 border-0 bg-transparent p-0 text-left ${isFuture ? 'cursor-default' : ''} ${!isLive && !isFuture ? 'cursor-pointer' : ''}`}
                   style={{ 
                     left: pos.x, 
                     top: pos.y,

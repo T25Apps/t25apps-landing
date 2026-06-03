@@ -38,6 +38,8 @@ body {
 /* App Card Hover Effects */
 .app-card {
   @apply transition-all duration-300 ease-out;
+  text-align: left;
+  
 }
 
 .app-card:hover {
