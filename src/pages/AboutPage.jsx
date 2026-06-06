@@ -7,23 +7,15 @@ import SEO from '../components/SEO'
 function AboutPage() {
   const { theme, toggleTheme } = useTheme()
 
-  const team = [
-    {
-      name: 'T25Apps Team',
-      role: 'Developers & Designers',
-      description: 'A passionate team dedicated to building beautiful, useful apps.',
-    }
-  ]
-
   const values = [
     {
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
         </svg>
       ),
       title: 'Simplicity',
-      description: 'We believe the best apps are simple and intuitive to use.',
+      description: 'Keep things clear, intuitive, and easy to use.',
     },
     {
       icon: (
@@ -32,16 +24,16 @@ function AboutPage() {
         </svg>
       ),
       title: 'Innovation',
-      description: 'We push boundaries to create fresh solutions for everyday problems.',
+      description: 'Find better ways to solve everyday challenges.',
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
         </svg>
       ),
       title: 'Quality',
-      description: 'Every app we build is crafted with care and attention to detail.',
+      description: 'Build products with care and continuously improve them based on user feedback.',
     },
   ]
 
@@ -98,27 +90,40 @@ function AboutPage() {
           {/* Hero Section */}
           <section className="py-12 md:py-20 text-center animate-fade-in-up">
             <h1 className="text-4xl md:text-5xl font-bold text-stone-900 dark:text-white mb-6">
-              About {APP_NAME}
+              About T25Apps
             </h1>
             <p className="text-lg md:text-xl text-stone-500 dark:text-stone-400 max-w-2xl mx-auto leading-relaxed">
-              Innovative yet simple apps to solve modern problems
+              Hi, I'm Sriram, the founder and developer behind T25Apps.
             </p>
           </section>
 
-          {/* Mission */}
+          {/* Personal Intro */}
           <section className="py-12 animate-fade-in-up delay-100">
             <div className="bg-white dark:bg-stone-900 rounded-2xl p-8 md:p-12 border border-stone-200 dark:border-stone-800 shadow-soft">
-              <h2 className="text-2xl font-bold text-stone-900 dark:text-white mb-4">Our Mission</h2>
+              <p className="text-stone-600 dark:text-stone-300 text-lg leading-relaxed mb-6">
+                T25Apps is my personal app studio where I build mobile apps that solve real-world problems 
+                in simple and practical ways. Every app is designed, developed, published, and maintained by me.
+              </p>
               <p className="text-stone-600 dark:text-stone-300 text-lg leading-relaxed">
-                We're on a mission to create apps that genuinely improve people's lives. Whether it's helping you stay organized, 
-                learn something new, or manage your finances, we believe technology should be a helpful companion, not a distraction.
+                I enjoy creating software that is genuinely useful and continuously improving it based on 
+                feedback from users around the world.
+              </p>
+            </div>
+          </section>
+
+          {/* Mission */}
+          <section className="py-12 animate-fade-in-up delay-150">
+            <div className="bg-white dark:bg-stone-900 rounded-2xl p-8 md:p-12 border border-stone-200 dark:border-stone-800 shadow-soft text-center">
+              <h2 className="text-2xl font-bold text-stone-900 dark:text-white mb-4">My Mission</h2>
+              <p className="text-stone-600 dark:text-stone-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                To build simple, thoughtful apps that solve real problems and make everyday tasks easier.
               </p>
             </div>
           </section>
 
           {/* Values */}
           <section className="py-12 animate-fade-in-up delay-200">
-            <h2 className="text-2xl font-bold text-stone-900 dark:text-white mb-8 text-center">What We Believe</h2>
+            <h2 className="text-2xl font-bold text-stone-900 dark:text-white mb-8 text-center">My Values</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {values.map((value, index) => (
                 <div 
