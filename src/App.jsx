@@ -1,11 +1,7 @@
-import React, { useEffect, Suspense, lazy } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import { trackPageView } from './utils/analytics'
-
-// Lazy load page components
-const AboutPage = lazy(() => import('./pages/AboutPage'))
-const ContactPage = lazy(() => import('./pages/ContactPage'))
 
 function ExternalRedirect({ url }) {
   useEffect(() => {
@@ -38,8 +34,6 @@ function AppContent() {
         <Route path="/" element={<HomePage />} />
         <Route path="/apps/recipe-diary" element={<ExternalRedirect url="https://recipediary.app" />} />
         <Route path="/apps/*" element={<Navigate to="/" replace />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </Suspense>
   )
